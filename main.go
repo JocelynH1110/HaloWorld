@@ -11,7 +11,7 @@ func greet(name string) {
 }
 
 func main() {
-	var name string
+	name := "" //同義 var name string
 	fmt.Println("whats your name?")
 	fmt.Scanln(&name)
 	greet(name)
