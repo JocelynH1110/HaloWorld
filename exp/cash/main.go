@@ -1,15 +1,20 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func getNonNegativeInt() int { //（）外是反回值
-	var num int
-
 	for {
+		var input string
 		fmt.Print("Change owed: ")
-		_, err := fmt.Scanf("%d", &num)
+		fmt.Scanln(&input)
 
-		if num >= 0 && err == nil {
+		num, err := strconv.Atoi(input) //字串轉換成int
+		//Ａtoi函數的返回值為(輸入的值,error)
+
+		if num >= 0 && err == nil { //err == nil 指沒有錯誤的話
 			return num
 		}
 
