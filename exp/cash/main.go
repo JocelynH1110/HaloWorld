@@ -23,32 +23,16 @@ func getNonNegativeInt() int { //（）外是反回值
 }
 
 func main() {
-	coinValues := map[int]int{
-		25: 0,
-		10: 0,
-		5:  0,
-		1:  0,
-	}
+	denominations := []int{25, 10, 5, 1}
 	totalCoins := 0
 
 	change := getNonNegativeInt()
-	fmt.Println(change)
 
-	fmt.Println("----------")
-	for coinValue := range coinValues {
+	for _, coinValue := range denominations {
 		numCoins := change / coinValue
-		coinValues[coinValue] = numCoins
 		totalCoins += numCoins
 		change -= numCoins * coinValue
 	}
 
-	fmt.Println("投入數量：")
-	for coinValue, numCoins := range coinValues {
-		if numCoins > 0 {
-			fmt.Printf("%d元 :%d枚\n", coinValue, numCoins)
-		}
-
-	}
-	fmt.Println("----------")
-	fmt.Printf("%d枚\n", totalCoins)
+	fmt.Println(totalCoins)
 }
