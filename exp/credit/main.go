@@ -8,15 +8,15 @@ const CARD_NUMBER string = "4003600000000014"
 
 func stringToDigits(str string) ([]int, error) {
 
-	digits := make([]int, 0)
+	digits := make([]int, len(str))
 
-	for _, chr := range str {
+	for i, chr := range str {
 		if chr < 48 || chr > 57 {
 			err := errors.New("不正確的數字")
 			return []int{}, err
 		}
 		digit := int(chr) - 48
-		digits = append(digits, digit)
+		digits[i] = digit
 
 	}
 
