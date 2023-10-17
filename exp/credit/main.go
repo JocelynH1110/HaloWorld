@@ -3,6 +3,7 @@ package main
 import "fmt"
 import "log"
 import "errors"
+import "strings"
 
 const CARD_NUMBER string = "4003600000000014"
 
@@ -49,6 +50,26 @@ func validateCardNumber(cardNumber string) (bool, error) {
 	}
 	checksum := calculateChecksumFromDigits(digits)
 	return checksum%10 == 0, nil
+
+}
+
+// strings.HasPrefix
+func guessCreditCardType(cardNumber string) string {
+	if strings.HasPrefix(cardNumber, "37") || strings.HasPrefix(cardNumber, "34") {
+		return "AMEX"
+	}
+
+	masterCardPrefixes := []string{"51", "52", "53", "54", "55"}
+	for _, cardNum := range masterCardPrefixes {
+		if strings.HasPrefix(cardNumber, cardNum) {
+			return "MASTERCARD"
+		}
+	}
+	if strings.HasPrefix(cardNumber, "4") {
+		return "VISA"
+	}
+
+	return "INVAILD"
 }
 
 func main() {
@@ -58,6 +79,8 @@ func main() {
 		log.Fatalln("輸入錯誤")
 	}
 
+	fmt.Println("Number:", CARD_NUMBER)
+	fmt.Println(guessCreditCardType(CARD_NUMBER))
 	fmt.Println(valid)
 
 }
